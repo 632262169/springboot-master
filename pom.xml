@@ -103,17 +103,17 @@
 		    <version>3.3.1</version>
 		</dependency>
 
-		<!--  redis -->
+<!-- 	redis
 		<dependency>  
 		    <groupId>org.springframework.boot</groupId>  
 		    <artifactId>spring-boot-starter-data-redis</artifactId>  
 		</dependency>
 		 
-		<!--  分布式系统中，sessiong共享有很多的解决方案，其中托管到缓存中应该是最常用的方案之一， -->
+		 分布式系统中，sessiong共享有很多的解决方案，其中托管到缓存中应该是最常用的方案之一，
 		<dependency>
 		    <groupId>org.springframework.session</groupId>
 		    <artifactId>spring-session-data-redis</artifactId>
-		</dependency>
+		</dependency> -->
 		
 	</dependencies>
 
