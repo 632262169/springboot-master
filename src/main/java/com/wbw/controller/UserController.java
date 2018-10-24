@@ -29,8 +29,8 @@ public class UserController {
 
 	@RequestMapping("/list")
 	public String list(Model model) {
-        model.addAttribute("hello","Hello, Spring Boot!");
-        model.addAttribute("userList", userRepository.findAll());
+//        model.addAttribute("hello","Hello, Spring Boot!");
+//        model.addAttribute("userList", userRepository.findAll());
         return "/user/list";
 	}
 	
