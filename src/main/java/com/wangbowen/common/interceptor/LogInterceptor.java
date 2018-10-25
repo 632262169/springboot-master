@@ -1,14 +1,12 @@
 package com.wangbowen.common.interceptor;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
-
-import com.wangbowen.modules.sys.utils.LogUtils;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 /**
  * Created by Administrator on 2017/10/16.
@@ -33,6 +31,6 @@ public class LogInterceptor implements HandlerInterceptor {
     @Override
     public void afterCompletion(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o, Exception e) throws Exception {
         // 保存日志
-        LogUtils.saveLog(httpServletRequest, o, e, null);
+        //LogUtils.saveLog(httpServletRequest, o, e, null);
     }
 }

@@ -1,5 +1,16 @@
 package com.wangbowen.modules.sys.utils;
 
+import java.lang.reflect.Method;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
+
+import org.apache.shiro.authz.annotation.RequiresPermissions;
+import org.springframework.web.method.HandlerMethod;
+
 import com.wangbowen.common.shiro.ShiroUtils;
 import com.wangbowen.common.utils.CacheUtils;
 import com.wangbowen.common.utils.Exceptions;
@@ -11,23 +22,12 @@ import com.wangbowen.modules.sys.entity.SysUser;
 import com.wangbowen.modules.sys.mapper.SysLogMapper;
 import com.wangbowen.modules.sys.mapper.SysMenuMapper;
 
-import org.apache.shiro.authz.annotation.RequiresPermissions;
-import org.springframework.stereotype.Component;
-import org.springframework.web.method.HandlerMethod;
-
-import javax.servlet.http.HttpServletRequest;
-import java.lang.reflect.Method;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 /**
  * 日志工具类
  * @author luckyxz999
  * @since 2017-10-16
  */
-@Component
+//@Component
 public class LogUtils {
 
     private static final String CACHE_MENU_NAME_PATH_MAP = "menuNamePathMap";
