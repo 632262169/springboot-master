@@ -34,10 +34,10 @@ public class UserController {
         return "/user/list";
 	}
 	
-	@RequestMapping("/index")
-	public String index() {
-		return "/user/index";
-	}
+//	@RequestMapping("/index")
+//	public String index() {
+//		return "/user/index";
+//	}
 	
 	@RequestMapping("/getPers")
 	@ResponseBody

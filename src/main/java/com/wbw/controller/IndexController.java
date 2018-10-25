@@ -1,7 +1,5 @@
 package com.wbw.controller;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -16,10 +14,15 @@ public class IndexController {
 
 //	@Autowired
 //	private StringRedisTemplate stringRedisTemplate;
-
+	
 	@RequestMapping("/index")
 	public String index() {
-		return "/admin/index";
+		return "admin/index";
+	}
+
+	@RequestMapping("/user/index")
+	public String index2() {
+		return "admin/user/index";
 	}
 
 //	@RequestMapping("/getUser")
@@ -48,14 +51,14 @@ public class IndexController {
 ////		return user1;
 //	}
 
-	@RequestMapping("/getSessionId")
-	String getSessionId(HttpServletRequest request) {
-		Object o = request.getSession().getAttribute("springboot");
-		if (o == null) {
-			o = "spring boot 牛逼了!!!有端口" + request.getLocalPort() + "生成";
-			request.getSession().setAttribute("springboot", o);
-		}
-		return "端口=" + request.getLocalPort() + " sessionId=" + request.getSession().getId() + "<br/>" + o;
-
-	}
+//	@RequestMapping("/getSessionId")
+//	String getSessionId(HttpServletRequest request) {
+//		Object o = request.getSession().getAttribute("springboot");
+//		if (o == null) {
+//			o = "spring boot 牛逼了!!!有端口" + request.getLocalPort() + "生成";
+//			request.getSession().setAttribute("springboot", o);
+//		}
+//		return "端口=" + request.getLocalPort() + " sessionId=" + request.getSession().getId() + "<br/>" + o;
+//
+//	}
 }
