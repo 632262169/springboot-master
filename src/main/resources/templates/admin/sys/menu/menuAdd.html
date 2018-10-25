@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.thymeleaf.org"
+	  layout:decorator="admin/include/layout_blank">
+	<head>
+		<title>菜单新增</title>
+        <script src="/common/js/ztree.select.single.js"></script>
+	</head>
+	<body>
+        <div class="content" layout:fragment="content">
+            <div class="box box-primary">
+                <form id="inputForm" class="" action="/admin/sys/menu/save" method="post">
+                    <div class="box-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="name">上级菜单</label>
+                                    <div class="input-group input-group-sm">
+                                        <input type="hidden" id="parentId" name="parentId" th:value="${parentMenu.id}">
+                                        <input type="text" class="form-control" id="parentName" name="parentName"
+                                               placeholder="请选择上级菜单" maxlength="32" readonly th:value="${parentMenu.name}">
+                                        <span class="input-group-btn">
+                                          <button type="button" id="selectParentBtn" class="btn btn-info btn-flat">选择</button>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="name">菜单名称<span class="required"> * </span></label>
+                                    <input type="text" class="form-control required" id="name" name="name"
+                                           placeholder="请输入菜单名称" maxlength="32">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="type">类型<span class="required"> * </span></label>
+                                    <select class="form-control required" id="type" name="type">
+                                        <option value="1">菜单</option>
+                                        <option value="2">权限</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>图标</label>
+                                    <div class="input-group input-group-sm">
+                                        <input type="hidden" id="icon" name="icon">
+                                        <span id="iconLabel"></span>
+                                        <span class="input-group-btn">
+                                          <button type="button" id="selectIconBtn" class="btn btn-info btn-flat">选择</button>
+                                        </span>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>菜单链接</label>
+                                    <input type="text" class="form-control" id="href" name="href"
+                                           placeholder="请输入菜单链接" maxlength="100">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>权限标识</label>
+                                    <input type="text" class="form-control" id="permission" name="permission"
+                                           placeholder="请输入权限标识" maxlength="100">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="status">是否显示<span class="required"> * </span></label>
+                                    <select class="form-control" id="status" name="status">
+                                        <option value="1">显示</option>
+                                        <option value="0">隐藏</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>排序号</label>
+                                    <input type="text" class="form-control digits" id="orderNo" name="orderNo"
+                                           placeholder="请输入排序号" maxlength="6" th:value="${maxOrderNo}">
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="box-footer">
+                        <button type="submit" class="btn btn-primary">
+                            保存
+                        </button>
+                    </div>
+                </form>
+            </div>
+            <script type="text/javascript" src="/sys/menu/form.js"></script>
+        </div>
+	</body>
+</html>

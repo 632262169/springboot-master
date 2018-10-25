@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.thymeleaf.org"
+      layout:decorator="front/include/layout">
+<head>
+    <title th:text="${article.title}">文章详情</title>
+    <meta name='description' th:content="${article.description}"/>
+    <meta name="keywords" th:content="${article.tags}"/>
+    <script src="/front/js/article-detail.js"></script>
+</head>
+<body>
+    <!-- content srart -->
+    <div layout:fragment="content">
+        <div class="am-u-md-8 am-u-sm-12">
+            <article class="am-article blog-article-p">
+                <div class="am-article-hd">
+                    <h1 class="am-article-title blog-text-center" th:text="${article.title}">文章标题</h1>
+                    <p class="am-article-meta blog-text-center">
+                        <span>
+                            <a target="_blank" th:href="@{/article-list(categoryId=${article.categoryId})}" class="blog-color"
+                                 th:text="${article.categoryName}"></a>&nbsp;&nbsp;
+                        </span>
+                        <span th:text="${article.author}"></span>&nbsp;&nbsp;
+                        <span th:text="${#dates.format(article.createDate, 'yyyy/MM/dd')}">2015/10/9</span>
+                    </p>
+                </div>
+                <div class="am-article-bd" th:utext="${article.content}"></div>
+            </article>
+
+            <div class="am-g blog-article-widget blog-article-margin">
+                <div class="am-u-lg-4 am-u-md-5 am-u-sm-7 am-u-sm-centered blog-text-center">
+                    <span class="am-icon-tags"> &nbsp;</span>
+                    <span th:text="${article.tags}"></span>
+                </div>
+            </div>
+            <hr>
+            <div class="am-comment" id="commentList" th:if="${commentList != null and commentList.size() > 0}">
+                <div class="am-u-sm-12 am-u-md-12 am-u-lg-12" th:each="comment : ${commentList}">
+                    <div>
+                        <span class="blog-color" th:text="${comment.name}">farm</span>
+                        <span class="am-fr" th:text="${#dates.format(comment.createDate, 'yyyy/MM/dd HH:mm')}"></span>
+                    </div>
+                    <p th:utext="${comment.content}"></p>
+                    <hr>
+                </div>
+            </div>
+
+
+            <form th:if="${article.allowComment eq '1'}" class="am-form am-g" id="commentForm" action="/submitComment" onsubmit="return submitComment()">
+                <input type="hidden" name="articleId" th:value="${article.id}"/>
+                <input type="hidden" name="replyId" value=""/>
+                <h3 class="blog-comment">评论</h3>
+                <fieldset>
+                    <div class="am-form-group am-u-sm-4 blog-clear-left">
+                        <input type="text" id="name" name="name" class="" placeholder="名字" maxlength="32" required>
+                    </div>
+                    <div class="am-form-group am-u-sm-4">
+                        <input type="email" id="email" name="email" class="" placeholder="邮箱" maxlength="64" required>
+                    </div>
+                    <div class="am-form-group am-u-sm-4">
+                        <input type="text" id="webUrl" name="webUrl" class="" placeholder="网址" maxlength="100">
+                    </div>
+
+                    <div class="am-form-group">
+                        <textarea class="" id="content" name="content" rows="5" placeholder="说点什么吧" maxlength="500" required></textarea>
+                    </div>
+
+                    <p><button id="submitBtn" type="submit" class="am-btn am-btn-default">发表评论</button></p>
+                </fieldset>
+            </form>
+            <div class="bdsharebuttonbox"><a href="#" class="bds_more" data-cmd="more"></a><a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a><a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博"></a><a href="#" class="bds_renren" data-cmd="renren" title="分享到人人网"></a><a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a></div>
+            <script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"32"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+
+        </div>
+    </div>
+    <!-- content end -->
+</body>
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.thymeleaf.org"
+      layout:decorator="front/include/layout">
+<head>
+    <title>文章检索</title>
+    <link rel="stylesheet" href="/front/css/page.css">
+    <script src="/front/js/search.js"></script>
+</head>
+<body>
+    <!-- content srart -->
+    <div layout:fragment="content">
+        <div class="am-u-md-8 am-u-sm-12">
+            <article th:each="article : ${articleList}" class="am-g blog-entry-article" >
+                <div class="am-u-md-12 am-u-sm-12 blog-entry-text">
+                    <span th:text="${article.postDate}">2015/10/9</span>
+                    <h1><a th:href="'/article-detail/' + ${article.id}" th:utext="${article.title}" target="_blank"></a></h1>
+                    <p th:utext="${article.keywords}"></p>
+                    <p th:utext="${article.description}"></p>
+                </div>
+            </article>
+            <div class="no-article" th:if="${articleList == null or articleList.size() == 0}">
+                暂无结果
+            </div>
+            <div th:utext="${page}" class="pagination"></div>
+        </div>
+
+    </div>
+    <!-- content end -->
+</body>
+</html>

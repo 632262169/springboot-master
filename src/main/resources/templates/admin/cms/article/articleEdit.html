@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.thymeleaf.org"
+	  layout:decorator="admin/include/layout_blank">
+	<head>
+		<title>文章编辑</title>
+        <script src="/common/js/ztree.select.single.js"></script>
+        <link href="/plugins/tagsinput/jquery.tagsinput.css" rel="stylesheet">
+        <script src="/plugins/tagsinput/jquery.tagsinput.min.js" ></script>
+        <script src="/common/js/ajaxfileupload.js" ></script>
+	</head>
+	<body>
+        <div class="content" layout:fragment="content">
+            <div class="box box-primary">
+                <form id="inputForm" class="" action="/admin/cms/article/save" method="post">
+                    <input type="hidden" name="id" id="id" th:value="${article.id}">
+                    <input type="hidden" name="oldShortTitle" id="oldShortTitle" th:value="${article.shortTitle}">
+                    <div class="box-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="title">文章标题<span class="required"> * </span></label>
+                                    <input type="text" class="form-control required" id="title" name="title"
+                                           placeholder="请输入文章标题" maxlength="64" th:value="${article.title}">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="shortTitle">短标题</label>
+                                    <input type="text" class="form-control" id="shortTitle" name="shortTitle"
+                                           placeholder="请输入短标题" maxlength="64" th:value="${article.shortTitle}">
+                                    <p class="help-block">短标题作为自定义访问路径，如：my_article</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="author">作者</label>
+                                    <input type="text" class="form-control" id="author" name="author"
+                                           placeholder="请输入文章作者" maxlength="64" th:value="${article.author}">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="linkUrl">外链</label>
+                                    <input type="text" class="form-control" id="linkUrl" name="linkUrl"
+                                           placeholder="" maxlength="1000" th:value="${article.linkUrl}">
+                                    <p class="help-block">点击文章详情时将直接跳转到此链接地址</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="categoryName">文章分类<span class="required"> * </span></label>
+                                    <div class="input-group input-group-sm">
+                                        <input type="hidden" id="categoryId" name="categoryId" th:value="${article.categoryId}">
+                                        <input type="text" class="form-control required" id="categoryName" name="categoryName"
+                                               placeholder="请选择文章分类" maxlength="32" readonly th:value="${categoryName}">
+                                        <span class="input-group-btn">
+                                            <button type="button" id="selectCategoryBtn" class="btn btn-info btn-flat">选择</button>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="tags">标签</label>
+                                    <input type="text" class="form-control required" id="tags" name="tags"
+                                           placeholder="请输入标签" maxlength="100" th:value="${article.tags}">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="thumbnailFile">封面图片</label>
+                                    <input type="file" id="thumbnailFile" name="thumbnailFile"
+                                           onchange="ajaxFileUpload('thumbnail')">
+                                    <div class="help-block" id="show_thumbnail">
+                                        <p>
+                                            <img style='max-height: 200px;max-width: 200px;' th:src="${thumbnail_url}">
+                                            <a href='javascript:void(0)' class='deleteImage' onclick='deleteImage(this)'>删除</a>
+                                            <input type="hidden" id="thumbnail" name="thumbnail" th:value="${article.thumbnail}">
+                                        </p>
+                                    </div>
+                                    <p class="help-block">支持jpg,jpeg,png,bmp格式的图片</p>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="description">简介</label>
+                                    <textarea class="form-control" rows="3" id="description" name="description"
+                                              placeholder="请输入文章简介" maxlength="200" th:utext="${article.description}"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="status">是否发布<span class="required"> * </span></label>
+                                    <select class="form-control" id="status" name="status" th:value="${article.status}">
+                                        <option value="1">是</option>
+                                        <option value="0">否</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="allowComment">允许评论<span class="required"> * </span></label>
+                                    <select class="form-control" id="allowComment"
+                                            name="allowComment" th:value="${article.allowComment}">
+                                        <option value="1">是</option>
+                                        <option value="0">否</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label for="container">文章内容<span class="required"> * </span></label>
+                                    <!-- 加载编辑器的容器 -->
+                                    <script id="container" name="content" type="text/plain"
+                                            th:utext="${article.content}"></script>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="box-footer">
+                        <button type="submit" class="btn btn-primary">
+                            保存
+                        </button>
+                    </div>
+                </form>
+            </div>
+            <script type="text/javascript" src="/cms/article/form.js"></script>
+        </div>
+	</body>
+</html>

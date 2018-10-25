@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.thymeleaf.org"
+	  layout:decorator="admin/include/layout">
+	<head>
+		<title>菜单列表</title>
+	</head>
+	<body>
+        <div class="content" layout:fragment="content">
+            <form id="sortForm" class="" action="/admin/sys/menu/saveSort" method="post">
+                <div class="box box-info">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">菜单管理</h3>
+                    </div>
+                    <div class="box-footer">
+                        <button type="button" class="btn btn-primary" id="addBtn">
+                            <i class="fa fa-plus" aria-hidden="true"></i>新增菜单
+                        </button>
+                        <button type="submit" class="btn btn-danger" id="saveSortBtn">
+                            <i class="fa fa-file" aria-hidden="true"></i>保存排序
+                        </button>
+                    </div>
+                </div>
+                <div class="box">
+                    <div class="box-body">
+
+                            <table id="listTable" class="table table-bordered table-hover">
+                            </table>
+
+                    </div>
+                </div>
+            </form>
+            <script type="text/javascript" src="/sys/menu/list.js"></script>
+        </div>
+	</body>
+</html>

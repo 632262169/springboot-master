@@ -1,44 +1,145 @@
 <head th:fragment="head">
-    
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>个人管理系统</title>
-  <!-- Tell the browser to be responsive to screen width -->
-  <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-  <!-- Bootstrap 3.3.7 -->
-  <link rel="stylesheet" href="/AdminLTE/bower_components/bootstrap/dist/css/bootstrap.min.css">
-  <!-- Font Awesome -->
-  <link rel="stylesheet" href="/AdminLTE/bower_components/font-awesome/css/font-awesome.min.css">
-  <!-- Ionicons -->
-  <link rel="stylesheet" href="/AdminLTE/bower_components/Ionicons/css/ionicons.min.css">
-  <!-- Theme style -->
-  <link rel="stylesheet" href="/AdminLTE/dist/css//AdminLTE.min.css">
-  <!-- /AdminLTE Skins. Choose a skin from the css/skins
-       folder instead of downloading all of them to reduce the load. -->
-  <link rel="stylesheet" href="/AdminLTE/dist/css/skins/_all-skins.min.css">
-  <!-- Morris chart -->
-  <link rel="stylesheet" href="/AdminLTE/bower_components/morris.js/morris.css">
-  <!-- jvectormap -->
-  <link rel="stylesheet" href="/AdminLTE/bower_components/jvectormap/jquery-jvectormap.css">
-  <!-- Date Picker -->
-  <link rel="stylesheet" href="/AdminLTE/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css">
-  <!-- Daterange picker -->
-  <link rel="stylesheet" href="/AdminLTE/bower_components/bootstrap-daterangepicker/daterangepicker.css">
-  <!-- bootstrap wysihtml5 - text editor -->
-  <link rel="stylesheet" href="/AdminLTE/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <meta http-equiv="Cache-Control" content="no-store" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <meta http-equiv="X-UA-Compatible"/>
+    <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/adminlte/css/AdminLTE.min.css">
+    <link rel="stylesheet" href="/adminlte/css/skins/_all-skins.css">
+    <link rel="stylesheet" href="/plugins/jqTreeGrid/jquery.treegrid.css">
+    <link rel="stylesheet" href="/common/css/common.css">
 
-  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-  <!--[if lt IE 9]>
-  <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-  <![endif]-->
+    <script src="/jquery/jquery-3.2.1.min.js"></script>
+    <script src="/jquery/jquery-migrate-3.0.0.min.js"></script>
+    <script src="/bootstrap/js/bootstrap.min.js"></script>
+    <script src="/adminlte/js/adminlte.min.js"></script>
+    <script src="/plugins/iCheck/icheck.min.js"></script>
+    <script src="/plugins/jquery-validation/jquery.validate.min.js"></script>
+    <script src="/plugins/jquery-validation/additional-methods.min.js"></script>
+    <script src="/plugins/jquery-validation/localization/messages_zh.min.js"></script>
+    <script src="/plugins/jquery-validation/form-validate-config.js"></script>
+    <!--[if lt IE 9]>
+    <script src="/html5shiv/html5shiv.min.js"></script>
+    <script src="/respond/respond.min.js"></script>
+    <![endif]-->
 
-  <!-- Google Font -->
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
-  
-  
-  
-  
-  
+    <!-- Bootstrap table -->
+    <script src="/plugins/bootstrap-table/bootstrap-table.min.js"></script>
+    <script src="/plugins/bootstrap-table/bootstrap-table-mobile.min.js"></script>
+    <script src="/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
+
+    <script src="/plugins/jqTreeGrid/jquery.treegrid.min.js"></script>
+    <script src="/plugins/jqTreeGrid/jquery.treegrid.extension.js"></script>
+    <script src="/plugins/jqTreeGrid/jquery.treegrid.bootstrap3.js"></script>
+
+    <script src="/plugins/layer/layer.min.js"></script>
+
+    <link href="/plugins/jquery-jbox/2.3/Skins2/Blue/jbox.css" rel="stylesheet" />
+    <script src="/plugins/jquery-jbox/2.3/jquery.jBox-2.3.min.js" type="text/javascript"></script>
+    <script src="/plugins/jquery-jbox/2.3/i18n/jquery.jBox-zh-CN.min.js" type="text/javascript"></script>
+    <!-- 配置文件 -->
+    <script type="text/javascript" charset="utf-8" src="/plugins/ueditor/ueditor.config.js"></script>
+    <!-- 编辑器源码文件 -->
+    <script type="text/javascript" charset="utf-8" src="/plugins/ueditor/ueditor.all.min.js"></script>
+    <script type="text/javascript" charset="utf-8" src="/plugins/ueditor/lang/zh-cn/zh-cn-ueditor.js"></script>
+    <script type="text/javascript" charset="utf-8" src="/plugins/ueditor/ueditor.init.js"></script>
+    <script src="/common/js/common.js"></script>
+    <script>
+        $(document).ready(function(){
+            initTree();
+            fix();
+            initUrls();
+        });
+
+        function initTree(){
+            var p = getUrlParam("p"), c=getUrlParam("c");
+            if (p != null) {
+                setCookie("menu_p", p, 1000);
+                setCookie("menu_c", c, 1000);
+            } else {
+                p = getCookie("menu_p"), c=getCookie("menu_c");
+            }
+            $(".treeview").removeClass("active");
+            $(".treeview_child").removeClass("active");
+
+
+            if (p != null && p != "" && p != "\"\"") {
+                var pActive = $("#"+p);
+                pActive.attr("class","treeview active");
+                pActive.find("#" + c).attr("class","active");
+            }
+
+        }
+
+        function getUrlParam(name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
+            var r = window.location.search.substr(1).match(reg);  //匹配目标参数
+            if (r != null) return unescape(r[2]); return null; //返回参数值
+        }
+
+        function fix() {
+            var neg = $('.main-header').outerHeight() + $('.main-footer').outerHeight();
+            var window_height = $(window).height();
+            var sidebar_height = $(".sidebar").height();
+
+            if (window_height >= sidebar_height + neg) {
+                $(".content-wrapper, .right-side").css('min-height', window_height - neg);
+            } else {
+                $(".content-wrapper, .right-side").css('min-height', sidebar_height );
+            }
+        }
+
+        function initUrls(){
+            $(".treeview-menu").each(function(){
+                var pid = $(this).parent().attr("id");
+                if(typeof(pid) == 'undefined' || null == pid){
+                    return;
+                }
+                $(this).find('a').each(function(){
+                    var cid = $(this).parent().attr("id");
+                    var href  = $(this).attr("href");
+                    if(href.indexOf("?") == -1){
+                        href = href+ "?p="+pid;
+                    }else{
+                        href = href+ "&p="+pid;
+                    }
+                    if("undefined" != typeof(cid) && "" != cid){
+                        href +=  "&c="+cid;
+                    }
+                    $(this).attr("href",href);
+                });
+            });
+        }
+
+        function toStr(obj) {
+            if (typeof obj == 'object') {
+                return JSON.stringify(obj);
+            } else {
+                return obj;
+            }
+            return '';
+        }
+
+        //设置cookie
+        function setCookie(cname, cvalue, exdays) {
+            var d = new Date();
+            d.setTime(d.getTime() + (exdays*24*60*60*1000));
+            var expires = "expires="+d.toUTCString();
+            document.cookie = cname + "=" + cvalue + "; " + expires + ";path=/";
+        }
+        //获取cookie
+        function getCookie(cname) {
+            var name = cname + "=";
+            var ca = document.cookie.split(';');
+            for(var i=0; i<ca.length; i++) {
+                var c = ca[i];
+                while (c.charAt(0)==' ') c = c.substring(1);
+                if (c.indexOf(name) != -1) return c.substring(name.length, c.length);
+            }
+            return "";
+        }
+    </script>
 </head>

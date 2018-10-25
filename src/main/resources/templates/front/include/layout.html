@@ -1,0 +1,17 @@
+<!-- 前端页面布局，自动包装head和foot -->
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.thymeleaf.org">
+    <head>
+        <meta th:replace="front/include/head :: head"/>
+    </head>
+    <body>
+        <div th:replace="front/include/nav :: nav"></div>
+        <div class="am-g am-g-fixed blog-fixed">
+            <div layout:fragment="content"></div>
+            <div th:replace="front/include/side :: side"></div>
+        </div>
+        <div th:replace="front/include/foot :: foot"></div>
+    </body>
+</html>
+

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.thymeleaf.org"
+	  layout:decorator="admin/include/layout_blank">
+	<head>
+		<title>角色编辑</title>
+        <link href="/plugins/jquery-ztree/3.5.12/css/zTreeStyle/zTreeStyle.min.css" rel="stylesheet" type="text/css"/>
+        <script src="/plugins/jquery-ztree/3.5.12/js/jquery.ztree.all-3.5.min.js" type="text/javascript"></script>
+        <script th:inline="javascript">
+            var selectedIds = [[${selectedIds}]], menuList = [[${menuList}]];
+        </script>
+    </head>
+	<body>
+        <div class="content" layout:fragment="content">
+            <div class="box box-primary">
+                <form id="inputForm" class="" action="/admin/sys/role/save" method="post">
+                    <input type="hidden" name="id" id="id" th:value="${role.id}">
+                    <input type="hidden" name="oldName" id="oldName" th:value="${role.name}">
+                    <div class="box-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="name">角色名称<span class="required"> * </span></label>
+                                    <input type="text" class="form-control required" id="name" name="name"
+                                           placeholder="请输入角色名称" maxlength="32" th:value="${role.name}">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="status">是否可用<span class="required"> * </span></label>
+                                    <select class="form-control" id="status" name="status" th:value="${role.status}">
+                                        <option value="1">正常</option>
+                                        <option value="0">禁用</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <input type="hidden" name="menuIds" id="menuIds" value="">
+                                <div id="menuTree" class="ztree" style="margin-top:3px;float:left;"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="box-footer">
+                        <button type="submit" class="btn btn-primary">
+                            保存
+                        </button>
+                    </div>
+                </form>
+            </div>
+            <script type="text/javascript" src="/sys/role/form.js"></script>
+        </div>
+	</body>
+</html>

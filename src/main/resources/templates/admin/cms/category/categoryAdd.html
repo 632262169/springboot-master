@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.thymeleaf.org"
+	  layout:decorator="admin/include/layout_blank">
+	<head>
+		<title>文章分类新增</title>
+        <script src="/common/js/ztree.select.single.js"></script>
+	</head>
+	<body>
+        <div class="content" layout:fragment="content">
+            <div class="box box-primary">
+                <form id="inputForm" class="" action="/admin/cms/category/save" method="post">
+                    <div class="box-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="name">上级文章分类</label>
+                                    <div class="input-group input-group-sm">
+                                        <input type="hidden" id="parentId" name="parentId" th:value="${parentCategory.id}">
+                                        <input type="text" class="form-control" id="parentName" name="parentName"
+                                               placeholder="请选择上级文章分类" maxlength="32" readonly th:value="${parentCategory.name}">
+                                        <span class="input-group-btn">
+                                          <button type="button" id="selectParentBtn" class="btn btn-info btn-flat">选择</button>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="name">文章分类名称<span class="required"> * </span></label>
+                                    <input type="text" class="form-control required" id="name" name="name"
+                                           placeholder="请输入文章分类名称" maxlength="32">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="status">是否显示<span class="required"> * </span></label>
+                                    <select class="form-control" id="status" name="status">
+                                        <option value="1">显示</option>
+                                        <option value="0">隐藏</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>排序号</label>
+                                    <input type="text" class="form-control digits" id="sort" name="sort"
+                                           placeholder="请输入排序号" maxlength="6" th:value="${maxOrderNo}">
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="box-footer">
+                        <button type="submit" class="btn btn-primary">
+                            保存
+                        </button>
+                    </div>
+                </form>
+            </div>
+            <script type="text/javascript" src="/cms/category/form.js"></script>
+        </div>
+	</body>
+</html>

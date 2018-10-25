@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.thymeleaf.org"
+	  layout:decorator="admin/include/layout">
+	<head>
+		<title>修改密码</title>
+	</head>
+	<body>
+        <div class="content" layout:fragment="content">
+            <div class="box box-primary">
+                <form id="inputForm" class="" action="/admin/sys/user/updatePwd" method="post">
+                    <div class="box-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="oldPassword">原始密码<span class="required"> * </span></label>
+                                    <input type="text" class="form-control required" id="oldPassword" name="oldPassword"
+                                           placeholder="请输入原始密码" maxlength="32">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="newPassword">新密码<span class="required"> * </span></label>
+                                    <input type="password" class="form-control required" id="newPassword" name="newPassword"
+                                           placeholder="请输入新密码" maxlength="32">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="reNewPassword">确认密码<span class="required"> * </span></label>
+                                    <input type="password" class="form-control required" id="reNewPassword" name="reNewPassword"
+                                           placeholder="请填写确认密码" maxlength="32" equalTo="#newPassword">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="box-footer">
+                        <button type="submit" class="btn btn-primary">
+                            保存
+                        </button>
+                    </div>
+                </form>
+            </div>
+            <script type="text/javascript" src="/sys/user/pwdForm.js"></script>
+        </div>
+	</body>
+</html>

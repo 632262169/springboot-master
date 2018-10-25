@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="keywords" content="wangbowen">
+	<meta name="description" content="wangbowen">
+	<title>管理平台 | 登录</title>
+	<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+	<link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
+	<link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">
+	<link rel="stylesheet" href="/adminlte/css/AdminLTE.min.css">
+	<link rel="stylesheet" href="/plugins/iCheck/square/blue.css">
+
+	<!--[if lt IE 9]>
+	<script src="/html5shiv/html5shiv.min.js"></script>
+	<script src="/respond/respond.min.js"></script>
+	<![endif]-->
+</head>
+<body class="hold-transition login-page">
+<div class="login-box">
+	<div class="login-logo">
+		<a href="javascript:void(0);"><b>wangbowen</b>管理平台</a>
+	</div>
+	<!-- /.login-logo -->
+	<div class="login-box-body">
+		<p class="login-box-msg"></p>
+
+		<form id="loginForm" action="#" class="login-form" method="post" autocomplete="off">
+			<div id="g1" class="form-group has-feedback">
+				<input type="text" name="loginName" class="form-control required" placeholder="请输入登录名">
+				<span class="glyphicon glyphicon-user form-control-feedback"></span>
+			</div>
+			<div id="g2" class="form-group has-feedback">
+				<input type="password" name="password" class="form-control required" placeholder="请输入密码">
+				<span class="glyphicon glyphicon-lock form-control-feedback"></span>
+			</div>
+			<!--<div id="g3" class="form-group has-feedback">-->
+				<!--<input type="text" name="randomcode" maxlength="12" class="form-control required" placeholder="请输入校验码">-->
+				<!--<span class="glyphicon glyphicon-lock form-control-feedback"></span>-->
+			<!--</div>-->
+			<div class="row">
+				<div class="col-xs-4">
+					<button type="submit" class="btn btn-primary btn-block btn-flat">登录</button>
+				</div>
+			</div>
+		</form>
+	</div>
+</div>
+
+<script src="/jquery/jquery-3.2.1.min.js"></script>
+<script src="/jquery/jquery-migrate-3.0.0.min.js"></script>
+<script src="/bootstrap/js/bootstrap.min.js"></script>
+<script src="/plugins/iCheck/icheck.min.js"></script>
+<script src="/plugins/jquery-validation/jquery.validate.min.js"></script>
+<script src="/plugins/jquery-validation/additional-methods.min.js"></script>
+<script src="/plugins/jquery-validation/localization/messages_zh.min.js"></script>
+<script src="/plugins/jquery-validation/form-validate-config.js"></script>
+<script>
+	$(function () {
+		$('input').iCheck({
+			checkboxClass: 'icheckbox_square-blue',
+			radioClass: 'iradio_square-blue',
+			increaseArea: '20%' // optional
+		});
+
+        $("#loginForm").validate(default_config);
+	});
+
+    function formSubmit(form) {
+        $.ajax({
+            url : "doLogin",
+            data : $(form).serialize(),
+            type : "POST",
+            success : function(result) {
+				console.log(result);
+                if (result.code == 0) {
+                    parent.location.href = 'index';
+                } else {
+                    alert(result.msg);
+                }
+            }
+        });
+
+        return false;
+    }
+</script>
+</body>
+</html>

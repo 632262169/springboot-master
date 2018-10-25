@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.thymeleaf.org"
+	  layout:decorator="admin/include/layout">
+	<head>
+		<title>文章标签列表</title>
+	</head>
+	<body>
+        <div class="content" layout:fragment="content">
+            <div id="toolbar">
+                <button type="submit" class="btn btn-danger" id="saveSortBtn">
+                    <i class="fa fa-file" aria-hidden="true"></i>保存排序
+                </button>
+            </div>
+            <form id="sortForm" class="" action="/admin/cms/tag/saveSort" method="post">
+                <div class="box">
+                    <div class="box-body">
+                        <table id="listTable" class="table table-bordered table-hover">
+                        </table>
+                    </div>
+                </div>
+            </form>
+
+            <script type="text/javascript" src="/cms/tag/list.js"></script>
+        </div>
+	</body>
+</html>

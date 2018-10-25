@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.thymeleaf.org"
+      layout:decorator="front/include/layout">
+<head>
+    <title>文章列表</title>
+    <link rel="stylesheet" href="/front/css/page.css">
+    <script src="/front/js/article-list.js"></script>
+</head>
+<body>
+    <!-- content srart -->
+    <div layout:fragment="content">
+        <div class="am-u-md-8 am-u-sm-12">
+            <article th:each="article : ${articleList}" class="am-g blog-entry-article" >
+                <!--<div class="am-u-lg-3 am-u-md-12 am-u-sm-12 blog-entry-img">-->
+                    <!--<a th:href="'/article-detail/' + ${article.id}" target="_blank">-->
+                        <!--<img th:if="${!#strings.isEmpty(article.thumbnail)}" th:src="${article.thumbnail}" alt="" class="am-u-sm-12">-->
+                        <!--<img th:if="${#strings.isEmpty(article.thumbnail)}" src="/front/img/nopic.jpg" alt="" class="am-u-sm-12">-->
+                    <!--</a>-->
+                <!--</div>-->
+                <div class="am-u-lg-12 am-u-md-12 am-u-sm-12 blog-entry-text">
+                    <span><a th:href="@{/article-list(categoryId=${article.categoryId})}" class="blog-color"
+                             th:text="${article.categoryName}" target="_blank">&nbsp;</a></span>
+                    <span th:text="${article.author}">&nbsp;</span>
+                    <span th:text="${#dates.format(article.createDate, 'yyyy/MM/dd')}">2015/10/9</span>
+                    <h1><a th:href="'/article-detail/' + ${article.id}" th:text="${article.title}" target="_blank"></a></h1>
+                    <p th:text="${article.description}"></p>
+                </div>
+            </article>
+            <div class="no-article" th:if="${articleList == null or articleList.size() == 0}">
+                暂无文章
+            </div>
+            <form id="dataForm" action="/article-list" method="post">
+                <input type="hidden" name="categoryId" value="" th:value="${categoryId}">
+                <input type="hidden" name="tag" value="" th:value="${tag}">
+                <input type="hidden" name="pageNo" id="pageNo" value="" th:value="${pageNo}">
+                <input type="hidden" name="pageSize" id="pageSize" value="" th:value="${pageSize}">
+            </form>
+            <div th:utext="${page}" class="pagination"></div>
+        </div>
+
+    </div>
+    <!-- content end -->
+</body>
+</html>

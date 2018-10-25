@@ -1,0 +1,29 @@
+<!-- nav start -->
+
+<nav class="am-g am-g-fixed blog-fixed blog-nav" th:fragment="nav">
+    <button class="am-topbar-btn am-topbar-toggle am-btn am-btn-sm am-btn-success am-show-sm-only blog-button" data-am-collapse="{target: '#blog-collapse'}" ><span class="am-sr-only">导航切换</span> <span class="am-icon-bars"></span></button>
+    <!--[if lt IE 10]>
+    <div class="browsehappy" role="dialog">
+        当前网页 <strong>不支持</strong> 你正在使用的浏览器. 为了正常的访问, 请 <a href="http://browsehappy.com/" target="_blank">升级你的浏览器</a>。
+    </div>
+    <![endif]-->
+    <div class="am-collapse am-topbar-collapse" id="blog-collapse">
+        <a href="/" class="navbar-logo">
+            <img src="/front/img/java.jpg" class="logo">
+        </a>
+
+        <ul class="am-nav am-nav-pills am-topbar-nav">
+            <li class="am-active"><a href="/article-list">文章列表</a></li>
+            <li><a href="/about">关于</a></li>
+        </ul>
+        <form class="am-topbar-form am-topbar-right am-form-inline" role="search" action="/search" id="searchForm">
+            <div class="am-form-group">
+                <input type="hidden" name="s_pageNo" id="s_pageNo" value="" th:value="${s_pageNo}">
+                <input type="hidden" name="s_pageSize" id="s_pageSize" value="" th:value="${s_pageSize}">
+                <input type="text" name="keyword" class="am-form-field am-input-sm" placeholder="搜索" maxlength="20" th:value="${keyword}">
+            </div>
+        </form>
+    </div>
+</nav>
+<hr>
+<!-- nav end -->

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wangbowen.modules.sys.mapper.SysUserMapper">
+	<!-- 通用查询映射结果 -->
+	<resultMap id="BaseResultMap" type="com.wangbowen.modules.sys.entity.SysUser">
+		<id column="id" property="id" />
+		<result column="create_by" property="createBy" />
+		<result column="create_date" property="createDate" />
+		<result column="update_by" property="updateBy" />
+		<result column="update_date" property="updateDate" />
+		<result column="del_flag" property="delFlag" />
+		<result column="login_name" property="loginName" />
+		<result column="password" property="password" />
+		<result column="name" property="name" />
+		<result column="email" property="email" />
+		<result column="mobile" property="mobile" />
+		<result column="status" property="status" />
+	</resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+		create_by AS createBy,
+		create_date AS createDate,
+		update_by AS updateBy,
+		update_date AS updateDate,
+		del_flag AS delFlag,
+        id, login_name AS loginName, password, name, email, mobile, status
+    </sql>
+
+</mapper>

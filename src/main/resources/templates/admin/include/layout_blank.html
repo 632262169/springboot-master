@@ -1,0 +1,14 @@
+<!-- 只引入head，用于弹出页面，如新增、修改等 -->
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.thymeleaf.org">
+    <head>
+        <meta th:replace="admin/include/head :: head"/>
+    </head>
+    <body class="hold-transition skin-blue sidebar-mini">
+        <div id="wrapper">
+            <div layout:fragment="content"></div>
+        </div>
+    </body>
+</html>
+

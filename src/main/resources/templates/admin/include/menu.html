@@ -1,52 +1,35 @@
-<aside class="main-sidebar" th:fragment="menu">
-
-
-  <!-- Left side column. contains the logo and sidebar -->
-    <!-- sidebar: style can be found in sidebar.less -->
-    
-    <!-- 左边 -->
+<div class="main-sidebar" th:fragment="menu">
     <section class="sidebar">
-    
-      <!-- 左边 用户头像 -->
-      <div class="user-panel">
-        <div class="pull-left image">
-          <img src="/AdminLTE/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
-        </div>
-        <div class="pull-left info">
-          <p>王博文</p>
-          <a href="#"><i class="fa fa-circle text-success"></i> 在线</a>
-        </div>
-      </div>
-      
-      <!-- 左边 搜索 -->
-      <form action="#" method="get" class="sidebar-form">
-        <div class="input-group">
-          <input type="text" name="q" class="form-control" placeholder="Search...">
-          <span class="input-group-btn">
-                <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>
-                </button>
-              </span>
-        </div>
-      </form>
-      
-      <!-- sidebar menu: : style can be found in sidebar.less -->
-      <ul class="sidebar-menu" data-widget="tree">
-        <li class="header">导航菜单</li>
-        <li class="treeview">
-          <a href="#">
-            <i class="fa fa-table"></i> <span>表格</span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-          </a>
-          <ul class="treeview-menu">
-            <li><a href="/user/index"><i class="fa fa-circle-o"></i> 列表</a></li>
-            <li><a href="/user/index"><i class="fa fa-circle-o"></i> 列表</a></li>
-          </ul>
-        </li>
-      </ul>
-      
-    </section>
-    <!-- /.sidebar -->
+        <ul class="sidebar-menu" data-widget="tree">
+            <li class="jpress_block"></li>
+            <li class="treeview active" id="dashboard">
+                <a href="/admin/index?p=0&c=0" onclick="location.href = '/admin/index?p=0&c=0'">
+                    <i class="fa fa-dashboard"></i>
+                    <span style="font-size: 14px;">管理首页</span>
+                </a>
+            </li>
+            <li class="jpress_block"></li>
 
-</aside>
+            <li th:each="menu : ${session.menuList}" class="treeview" th:attr="id=${'p_' + menu.id}"
+                th:if="${menu.parentId == null || menu.parentId == '' || menu.parentId == 0}">
+                <a href="#">
+                    <i th:class="${'fa fa-fw ' + menu.icon}"></i>
+                    <span th:text="${menu.name}"></span>
+                    <span class="pull-right-container">
+                      <span class="label label-primary pull-right"></span>
+                    </span>
+                </a>
+                <ul class="treeview-menu">
+                    <li th:each="cmenu : ${session.menuList}" th:if="${cmenu.parentId == menu.id}"
+                        th:attr="id=${'c_' + cmenu.id}">
+                        <a class="J_menuItem" th:href="${cmenu.href}">
+                            <i th:class="${'fa fa-fw ' + cmenu.icon}"></i><span th:text="${cmenu.name}"></span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+
+            <li class="jpress_block"></li>
+        </ul>
+    </section>
+</div>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wangbowen.modules.cms.mapper.CmsTagMapper">
+	<select id="getTagByName" resultMap="BaseResultMap" parameterType="map" >
+		select *
+		from cms_tag
+		where name = #{tagName}
+		limit 1
+	</select>
+
+</mapper>

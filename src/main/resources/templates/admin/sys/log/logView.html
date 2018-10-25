@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.thymeleaf.org"
+	  layout:decorator="admin/include/layout_blank">
+	<head>
+		<title>日志详情</title>
+	</head>
+	<body>
+        <div class="content" layout:fragment="content">
+            <div class="box box-primary">
+                <div class="box-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="title">操作名称</label>
+                                <input type="text" class="form-control" id="title" readonly th:value="${log.title}">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="requestUri">链接</label>
+                                <input type="text" class="form-control" id="requestUri" readonly th:value="${log.requestUri}">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="remoteAddr">用户IP</label>
+                                <input type="text" class="form-control" id="remoteAddr" readonly th:value="${log.remoteAddr}">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="userAgent">浏览器信息</label>
+                                <input type="text" class="form-control" id="userAgent" readonly th:value="${log.userAgent}">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="createByName">操作人</label>
+                                <input type="text" class="form-control" id="createByName" readonly th:value="${log.createByName} + '(id:' + ${log.createBy} + ')'">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="createDate">操作时间</label>
+                                <input type="text" class="form-control" id="createDate" readonly th:value="${#dates.format(log.createDate, 'yyyy-MM-dd HH:mm:ss')}">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="params">参数</label>
+                                <textarea class="form-control" rows="3" id="params" disabled="" th:text="${log.params}"></textarea>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="exception">异常信息</label>
+                                <textarea class="form-control" rows="3" id="exception" disabled="" th:text="${log.exception}"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <script type="text/javascript" src="/sys/user/form.js"></script>
+        </div>
+	</body>
+</html>

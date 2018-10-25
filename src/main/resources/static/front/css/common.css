@@ -1,0 +1,14 @@
+.browsehappy{position:fixed;z-index:999;top:0;bottom:0;width:100%;height:40px;padding:10px;text-align:center;color:#8a1f11;background:#fbe3e4}
+.browsehappy a{font-weight:700;text-decoration:underline;color:#8a1f11}
+.navbar-logo {
+    float: left;
+    height: 80px;
+    padding: 5px;
+}
+.logo{
+    height: 100%;
+}
+.no-article{
+    color: #888888;
+    text-align: center;
+}

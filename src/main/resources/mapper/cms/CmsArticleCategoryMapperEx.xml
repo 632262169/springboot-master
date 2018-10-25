@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wangbowen.modules.cms.mapper.CmsCategoryMapper">
+	<select id="getMaxOrderNo" resultType="java.lang.Integer" parameterType="map" >
+		select max(sort) from cms_category WHERE del_flag = 0
+		<if test="parentId != null" >
+			and parent_id = #{parentId,jdbcType=BIGINT}
+		</if>
+		<if test="parentId == null" >
+			and parent_id is null
+		</if>
+	</select>
+
+	<!-- 查询给定分类下的所有子分类ID列表 -->
+	<select id="selectAllChildIds" resultType="java.lang.String" parameterType="map" >
+		select getArticleCateChildList(#{parentId,jdbcType=BIGINT})
+	</select>
+
+</mapper>

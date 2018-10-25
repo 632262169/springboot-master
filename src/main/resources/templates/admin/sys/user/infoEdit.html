@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.thymeleaf.org"
+	  layout:decorator="admin/include/layout">
+	<head>
+		<title>修改个人信息</title>
+	</head>
+	<body>
+        <div class="content" layout:fragment="content">
+            <div class="box box-primary">
+                <form id="inputForm" class="" action="/admin/sys/user/save" method="post">
+                    <input type="hidden" name="id" id="id" th:value="${user.id}">
+                    <input type="hidden" name="oldLoginName" id="oldLoginName" th:value="${user.loginName}">
+                    <div class="box-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="name">姓名<span class="required"> * </span></label>
+                                    <input type="text" class="form-control required" id="name" name="name"
+                                           placeholder="请填写姓名" maxlength="32" th:value="${user.name}">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="loginName">登录名<span class="required"> * </span></label>
+                                    <input type="text" class="form-control required" id="loginName" name="loginName"
+                                           placeholder="请填写登录名" maxlength="32" th:value="${user.loginName}">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="email">电子邮箱</label>
+                                    <input type="email" class="form-control" id="email" name="email"
+                                           placeholder="请填写电子邮箱" maxlength="100" th:value="${user.email}">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="mobile">手机号码</label>
+                                    <input type="text" class="form-control" id="mobile" name="mobile"
+                                           placeholder="请填写手机号码" maxlength="32" th:value="${user.mobile}">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="box-footer">
+                        <button type="submit" class="btn btn-primary">
+                            保存
+                        </button>
+                    </div>
+                </form>
+            </div>
+            <script type="text/javascript" src="/sys/user/infoForm.js"></script>
+        </div>
+	</body>
+</html>

@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wangbowen.modules.sys.mapper.SysMenuMapper">
+	<select id="listUserPermissions" resultType="java.lang.String" parameterType="map" >
+	  SELECT DISTINCT m.permission
+		FROM sys_menu m
+		LEFT JOIN sys_role_menu srm ON m.id = srm.menu_id
+		LEFT JOIN sys_user_role sur ON srm.role_id = sur.role_id
+	   WHERE m.del_flag = 0
+	     and sur.user_id = #{userId}
+	</select>
+
+    <select id="listAllPermissions" resultType="java.lang.String">
+        SELECT DISTINCT m.permission
+        FROM sys_menu m
+        WHERE m.del_flag = 0
+    </select>
+
+	<select id="getUserMenuList" resultMap="BaseResultMap" parameterType="map" >
+		SELECT DISTINCT
+                m.id,
+                m.parent_id,
+                m.name,
+                m.href,
+                m.permission,
+                m.type,
+                m.icon,
+                m.order_no,
+                m.target
+            FROM
+                sys_menu m
+            LEFT JOIN sys_role_menu srm ON m.id = srm.menu_id
+            LEFT JOIN sys_user_role sur ON srm.role_id = sur.role_id
+            LEFT JOIN sys_role sr on sr.id = sur.role_id
+            WHERE m.status = 1
+              AND m.del_flag = 0
+              AND sur.user_id = #{userId}
+              AND m.type = 1
+              AND sr.del_flag = 0
+              AND sr.status = 1
+         order by m.order_no
+	</select>
+
+    <select id="listAllMenu" resultMap="BaseResultMap">
+        SELECT DISTINCT
+        m.id,
+        m.parent_id,
+        m.name,
+        m.href,
+        m.permission,
+        m.type,
+        m.icon,
+        m.order_no,
+        m.target
+        FROM
+        sys_menu m
+        WHERE m.status = 1
+        AND del_flag = 0
+        AND m.type = 1
+        order by m.order_no
+    </select>
+
+    <select id="listAllMenuAndPerm" resultMap="BaseResultMap">
+        SELECT DISTINCT
+        m.id,
+        m.parent_id,
+        m.name,
+        m.href,
+        m.permission,
+        m.type,
+        m.icon,
+        m.order_no,
+        m.target
+        FROM
+        sys_menu m
+        WHERE del_flag = 0
+        order by m.order_no
+    </select>
+
+    <!-- 查询给定分类下的所有子分类ID列表 -->
+    <select id="selectAllChildIds" resultType="java.lang.String" parameterType="map" >
+        select getMenuChildList(#{parentId,jdbcType=BIGINT})
+    </select>
+
+    <select id="getMaxOrderNo" resultType="java.lang.Integer" parameterType="map" >
+        select max(order_no) from sys_menu WHERE del_flag = 0
+        <if test="parentId != null" >
+            and parent_id = #{parentId,jdbcType=BIGINT}
+        </if>
+        <if test="parentId == null" >
+            and parent_id is null
+        </if>
+    </select>
+
+    <delete id="deleteMenu" parameterType="map" >
+        update sys_menu
+        set del_flag = 1
+        where id in (getMenuChildList(#{id}))
+    </delete>
+
+    <select id="listRoleMenu" resultMap="BaseResultMap" parameterType="map" >
+        SELECT
+        m.id,
+        m.parent_id,
+        m.name,
+        m.href,
+        m.permission,
+        m.type,
+        m.icon,
+        m.order_no,
+        m.target
+        FROM
+        sys_menu m
+        LEFT JOIN sys_role_menu srm ON m.id = srm.menu_id
+        WHERE m.status = 1
+        AND m.del_flag = 0
+        AND srm.role_id = #{roleId}
+        order by m.order_no
+    </select>
+</mapper>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.thymeleaf.org"
+      layout:decorator="front/include/layout">
+<head>
+    <title>首页</title>
+    <script src="/front/js/index.js"></script>
+</head>
+<body>
+    <!-- content srart -->
+    <div layout:fragment="content">
+        <div class="am-u-md-8 am-u-sm-12">
+            <article th:each="article : ${articleList}" class="am-g blog-entry-article" >
+                <div class="am-u-lg-6 am-u-md-12 am-u-sm-12 blog-entry-img">
+                    <img th:if="${!#strings.isEmpty(article.thumbnail)}" th:src="${article.thumbnail}" alt="" class="am-u-sm-12">
+                    <img th:if="${#strings.isEmpty(article.thumbnail)}" src="/front/img/nopic.jpg" alt="" class="am-u-sm-12">
+                </div>
+                <div class="am-u-lg-6 am-u-md-12 am-u-sm-12 blog-entry-text">
+                    <span><a th:href="@{/article-list(categoryId=${article.categoryId})}" class="blog-color"
+                             th:text="${article.categoryName}">&nbsp;</a></span>
+                    <span th:text="${article.author}">&nbsp;</span>
+                    <span th:text="${#dates.format(article.createDate, 'yyyy/MM/dd')}">2015/10/9</span>
+                    <h1><a th:href="'/article-detail/' + ${article.id}" th:text="${article.title}"></a></h1>
+                    <p th:text="${article.description}"></p>
+                </div>
+            </article>
+        </div>
+    </div>
+    <!-- content end -->
+</body>
+</html>
