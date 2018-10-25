@@ -28,6 +28,10 @@
 		<result column="remarks" property="remarks" />
 		<result column="sort" property="sort" />
 	</resultMap>
+	
+    <resultMap id="ListResultMap" type="com.wangbowen.modules.cms.entity.CmsArticle" extends="BaseResultMap">
+        <result column="category_name" property="categoryName" />
+    </resultMap>
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
@@ -39,4 +43,76 @@
         id, category_id AS categoryId, tags, title, short_title AS shortTitle, description, content, author, thumbnail, link_url AS linkUrl, praise_total AS praiseTotal, view_total AS viewTotal, share_count AS shareCount, read_count AS readCount, status, allow_comment AS allowComment, remarks, sort
     </sql>
 
+
+	<select id="getByShortTitle" resultMap="BaseResultMap" parameterType="map" >
+		select *
+		from cms_article
+		where short_title = #{shortTitle}
+		limit 1
+	</select>
+
+	<update id="clearArticleCategory" parameterType="map" >
+		update cms_article
+		set category_id = null
+		where category_id = #{categoryId}
+	</update>
+
+    <select id="selectArticlePage" resultMap="ListResultMap" parameterType="map" >
+        select
+            ca.create_by,
+            ca.create_date,
+            ca.update_by,
+            ca.update_date,
+            ca.del_flag,
+            ca.id,
+            ca.category_id,
+            cac.name as category_name,
+            ca.tags,
+            ca.title,
+            ca.short_title,
+            ca.description,
+            ca.author,
+            ca.thumbnail,
+            ca.link_url,
+            ca.praise_total,
+            ca.view_total,
+            ca.share_count,
+            ca.read_count,
+            ca.status,
+            ca.allow_comment,
+            ca.remarks,
+            ca.sort
+        from cms_article ca
+        left join cms_category cac on ca.category_id=cac.id
+        where ca.del_flag='0'
+        <if test="categoryId != null" >
+            and ca.category_id = #{categoryId,jdbcType=BIGINT}
+        </if>
+        <if test="title != null and title != ''" >
+            and ca.title like CONCAT('%', #{title}, '%')
+        </if>
+        <if test="status != null and status != ''" >
+            and ca.status = #{status}
+        </if>
+        <if test="tag != null and tag != ''" >
+            and EXISTS (
+                SELECT
+                1
+                FROM
+                cms_article_tags cat,
+                cms_tag ct
+                WHERE
+                cat.tag_id = ct.id
+                AND ct.name = #{tag}
+                AND ca.id = cat.article_id
+            )
+        </if>
+        order by sort desc, create_date desc
+    </select>
+
+    <update id="increaseReadCount" parameterType="map" >
+        update cms_article
+        set read_count = read_count + 1
+        where id = #{id}
+    </update>
 </mapper>
