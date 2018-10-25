@@ -34,6 +34,11 @@ public class UserController {
         return "/user/list";
 	}
 	
+	@RequestMapping("/index")
+	public String index() {
+		return "/user/index";
+	}
+	
 	@RequestMapping("/getPers")
 	@ResponseBody
 	public Map<String,Object> listProduct(@RequestParam(value = "limit", required = false) Integer limit, 
