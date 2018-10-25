@@ -176,22 +176,17 @@
 			<version>${fastjson.version}</version>
 		</dependency>
 
+		<!-- https://mvnrepository.com/artifact/cn.songxinqiang/com.baidu.ueditor -->
 		<dependency>
-			<groupId>com.baidu.ueditor</groupId>
-			<artifactId>ueditor</artifactId>
-			<version>1.1.2</version>
+		    <groupId>cn.songxinqiang</groupId>
+		    <artifactId>com.baidu.ueditor</artifactId>
+		    <version>1.1.2-offical</version>
 		</dependency>
 
         <dependency>
             <groupId>com.aliyun.oss</groupId>
             <artifactId>aliyun-sdk-oss</artifactId>
             <version>${aliyun.oss.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>com.ckfinder</groupId>
-            <artifactId>apache-ant-zip</artifactId>
-            <version>2.3</version>
         </dependency>
 
         <!-- https://mvnrepository.com/artifact/oro/oro -->
