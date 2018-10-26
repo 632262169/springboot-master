@@ -11,7 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 /**
- * Blog启动入口
+ * 启动入口
  */
 @EnableTransactionManagement
 @SpringBootApplication
@@ -20,19 +20,17 @@ public class Application {
     protected final static Logger logger = LoggerFactory.getLogger(Application.class);
 
     /**
-     * <p>
-     * 程序启动入口<br>
-     * </p>
+     * 程序启动入口
      */
     public static void main(String[] args) {
         logger.info("*******************************");
-        logger.info("*******FarmBlog服务开始启动********");
+        logger.info("*******服务开始启动********");
         logger.info("*******************************");
 
         SpringApplication.run(Application.class, args);
 
         logger.info("*******************************");
-        logger.info("*******FarmBlog服务启动成功********");
+        logger.info("*******服务启动成功********");
         logger.info("*******************************");
     }
 

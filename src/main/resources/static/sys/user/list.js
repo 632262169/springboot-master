@@ -93,7 +93,7 @@ function add() {
         title : '增加用户',
         maxmin : true,
         shadeClose : false, // 点击遮罩关闭层
-        area : [ '400px', '500px' ],
+        area : [ '1200px', '800px' ],
         content : prefix + '/add'
     });
 }

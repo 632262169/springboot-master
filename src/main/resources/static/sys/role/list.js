@@ -80,7 +80,7 @@ function add() {
         title : '增加角色',
         maxmin : true,
         shadeClose : false, // 点击遮罩关闭层
-        area : [ '400px', '500px' ],
+        area : [ '1000px', '800px' ],
         content : prefix + '/add'
     });
 }

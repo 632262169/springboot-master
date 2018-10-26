@@ -1,6 +1,9 @@
-## farmblog 系统简介
-
-个人博客系统，基于Springboot、SpringMVC、Mybatis-plus、thymeleaf、ApacheShiro等，后台主题使用AdminLTE，前端主题基于amazeUI响应式设计
+基于Springboot、
+    SpringMVC、
+    Mybatis-plus、
+    thymeleaf、
+    ApacheShiro
+        等，后台主题使用AdminLTE，前端主题基于amazeUI响应式设计
 
 ## 功能说明
 
@@ -13,7 +16,7 @@
 1. 创建数据库，导入初始化sql文件，即/resources/db/blog.sql
 2. 修改数据库连接，/resources/application.yml
 3. 图片库使用阿里云oss，可自行申请阿里云账号，oss有免费使用额度，并修改配置applicationi.properties
-4. 直接运行application.java，前端访问：[http://localhost](http://http://localhost)，后台访问:[http://localhost/admin](http://http://localhost/admin)，账号admin，密码admin
+4. 直接运行application.java，前端访问：[http://localhost](http://http://localhost)，后台访问:[http://localhost/admin] 账号admin，密码admin
 
 ## 技术选型
 
@@ -38,7 +41,3 @@
 * 弹层组件：layer
 * 树形表格：Bootstrap TreeTable
 * 树形插件：zTree
-
-## 截图
-![输入图片说明](https://gitee.com/uploads/images/2018/0313/100725_dd32fbcc_331488.jpeg "TIM截图20180313100623.jpg")
-![输入图片说明](https://gitee.com/uploads/images/2018/0313/100739_3ea6497c_331488.jpeg "TIM截图20180313100536.jpg")
